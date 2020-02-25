@@ -8,6 +8,7 @@ spec:
     matchLabels:
       app.kubernetes.io/name: go-microservice
       app.kubernetes.io/instance: {{ .Release.Name }}
+      slot: blue
   template:
     metadata:
       labels:
