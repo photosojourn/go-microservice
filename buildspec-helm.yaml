@@ -3,7 +3,7 @@ phases:
   pre_build: # Add kubeconfig to access to EKS cluster
     commands:
       - "mkdir ~/.kube/"
-      - "cp kubeconfig ~/.kube/config"
+      - aws eks update-kubeconfig --name russ-cluster
   post_build:
     commands:
       - "helm $HELM_ACTION -i go-micoservice chart/ -f ./chart/values.yaml"
