@@ -6,7 +6,7 @@ spec:
   replicas: {{ .Values.blue.replicaCount }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: go-microservice-blue
+      app.kubernetes.io/name: go-microservice
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
