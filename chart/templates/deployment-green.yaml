@@ -11,7 +11,7 @@ spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: go-microservice-green
+        app.kubernetes.io/name: go-microservice
         app.kubernetes.io/instance: {{ .Release.Name }}
         slot: green
     spec:
