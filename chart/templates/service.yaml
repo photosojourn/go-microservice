@@ -6,6 +6,7 @@ spec:
   type: {{ .Values.service.type }}
   selector:
     app.kubernetes.io/name: go-microservice
+    slot: {{ .Values.productionSlot}}
   ports:
     - port: {{ .Values.service.port }}
       targetPort: http
