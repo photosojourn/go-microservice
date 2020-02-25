@@ -1,0 +1,9 @@
+version: 0.2
+phases:
+  pre_build: # Add kubeconfig to access to EKS cluster
+    commands:
+      - "mkdir ~/.kube/"
+      - "cp kubeconfig ~/.kube/config"
+  post_build:
+    commands:
+      - "helm $HELM_ACTION -i go-micoservice chart/ -f ./chart/values.yaml"

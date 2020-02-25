@@ -8,4 +8,5 @@ RUN go build -o /bin/go-microservice
 
 FROM golang:1.13-alpine
 COPY --from=build /bin/go-microservice /bin/go-microservice
+EXPOSE 8080
 ENTRYPOINT ["/bin/go-microservice"]
