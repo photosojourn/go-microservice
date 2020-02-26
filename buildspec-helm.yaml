@@ -6,4 +6,4 @@ phases:
       - aws eks update-kubeconfig --name russ-cluster
   post_build:
     commands:
-      - "helm $HELM_ACTION -i go-micoservice chart/ -f ./chart/values.yaml -n go-microservice"
+      - "helm $HELM_ACTION -i go-mircoservice chart/ -f ./chart/values.yaml -n go-microservice"
