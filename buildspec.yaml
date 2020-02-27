@@ -12,9 +12,9 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...          
-      - docker build -t russ-go-microservice:latest .
-      - docker tag russ-go-microservice:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/russ-go-microservice:latest
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/russ-go-microservice:latest 
+      - docker build -t go-microservice:latest .
+      - docker tag russ-go-microservice:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/go-microservice:latest
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/go-microservice:latest 
   post_build:
     commands:
       - echo Build completed on `date`
