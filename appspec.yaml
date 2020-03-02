@@ -1,0 +1,8 @@
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: "app"
+        LoadBalancerInfo: 
+          ContainerName: "go-microservice" 
+          ContainerPort: 8080
