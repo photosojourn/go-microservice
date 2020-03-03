@@ -1,5 +1,5 @@
 {
-    "executionRoleArn": "arn:aws:iam::account_ID:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::480810688838:role/go_ecs_execution_role",
     "containerDefinitions": [
         {
             "name": "go-microservice",
