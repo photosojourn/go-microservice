@@ -23,5 +23,5 @@ phases:
   post_build:
     commands:
       - docker push $REPOSITORY_URI:latest 
-      - trivy --no-progress --exit-code 1 --severity HIGH,CRITICAL $REPOSITORY_UI:latest
+      - trivy --no-progress --exit-code 1 --severity HIGH,CRITICAL $REPOSITORY_URI:latest
       - echo Build completed on `date`
