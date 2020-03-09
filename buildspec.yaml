@@ -19,9 +19,9 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...          
-      - docker build -t $REPOSITORY_URI/go-microservice:latest .
+      - docker build -t $REPOSITORY_URI:latest .
   post_build:
     commands:
-      - docker push $REPOSITORY_URI/go-microservice:latest 
-      - trivy --no-progress --exit-code 1 --severity HIGH,CRITICAL $REPOSITORY_UI/go-microservice:latest
+      - docker push $REPOSITORY_URI:latest 
+      - trivy --no-progress --exit-code 1 --severity HIGH,CRITICAL $REPOSITORY_UI:latest
       - echo Build completed on `date`
