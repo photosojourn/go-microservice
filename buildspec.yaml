@@ -19,7 +19,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...          
-      - docker build -t $REPOSITORY_URI/go-microservice:latest
+      - docker build -t $REPOSITORY_URI/go-microservice:latest .
   post_build:
     commands:
       - trivy --no-progress --exit-code 1 --severity HIGH,CRITICAL $REPOSITORY_URI:success
