@@ -2,6 +2,8 @@
 
 This is an example Golang microservice that was written with sole purpose of building and testikng CI/CD pipelines. Litrally it returns just a string. Thats it.
 
+To over-ride the default message you can get my setting the enviroment variable `GO_MS_MESSAGE`.
+
 ### AWS CodeBuild specs
 
 This project also contains two example AWS CodeBuild spec files listed below:
