@@ -3,6 +3,7 @@ FROM golang:1.13-alpine AS build
 #Install git
 RUN apk add --no-cache git
 RUN go get github.com/photosojourn/go-microservice
+RUN go get github.com/gorilla/handlers
 WORKDIR /go/src/github.com/photosojourn/go-microservice
 RUN go build -o /bin/go-microservice
 

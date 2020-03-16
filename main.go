@@ -5,6 +5,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/gorilla/handlers"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -20,7 +22,8 @@ func healthcheckHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/", handler)
+	fmt.Fprintf(os.Stdout, "Starting listening on Port 8080\n")
+	http.Handle("/", handlers.LoggingHandler(os.Stdout, http.HandlerFunc(handler)))
 	http.HandleFunc("/health", healthcheckHandler)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
