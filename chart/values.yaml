@@ -6,11 +6,11 @@ productionSlot: green
 
 blue:
   replicaCount: 1
-  image: 480810688838.dkr.ecr.eu-west-1.amazonaws.com/russ-go-microservice:latest
+  image: photosojourn/go-microservice:latest
   pullPolicy: Always
 green:
   replicaCount: 1
-  image: 480810688838.dkr.ecr.eu-west-1.amazonaws.com/russ-go-microservice:latest
+  image: photosojourn/go-microservice:latest
   pullPolicy: Always
 
 
