@@ -43,15 +43,10 @@ stages:
                     kubernetesServiceConnection: 'dev-default-1589456418781'
                     namespace: $(k8sNamespace)
                     command: 'install'
-                    overrideValues: |
-                      blue.image=$(Build.Id)
-                      blue.pullPolicy=IfNotPresent
-                      green.image=$(Build.BuildId)
-                      green.pullPolicy=IfNotPresent
+                    overrideValues: blue.image=$(Build.Id), blue.pullPolicy=IfNotPresent, green.image=$(Build.BuildId), green.pullPolicy=IfNotPresent
                     chartType: 'FilePath'
-                    chartPath: './chart/values.yaml'
-                    releaseName: 'go-microservice'
-
+                    chartPath: './chart/'
+                    chartName: 'go-microservice'
 
                 - task: Kubernetes@1
                   inputs:
