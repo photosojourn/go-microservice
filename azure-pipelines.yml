@@ -42,17 +42,15 @@ stages:
                     connectionType: 'Kubernetes Service Connection'
                     kubernetesServiceConnection: 'dev-default-1589456418781'
                     namespace: $(k8sNamespace)
-                    command: 'ls'
+                    command: 'install'
+                    chartType: 'FilePath'
+                    chartPath: './chart/values.yaml'
+                    releaseName: 'go-microservice'
+
 
                 - task: Kubernetes@1
                   inputs:
+
                     namespace: $(k8sNamespace)
                     command: 'get'
                     arguments: 'namespaces'
-
-
-
-
-
-
-
