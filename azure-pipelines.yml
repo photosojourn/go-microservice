@@ -39,9 +39,7 @@ stages:
               steps:
                 - task: HelmDeploy@0
                   inputs:
-                    connectionType: 'Kubernetes Service Connection'
-                    kubernetesServiceConnection: 'dev-default-1589456418781'
-                    namespace: 'default'
+                    namespace: $(k8sNamespace)
                     command: 'ls'
 
                 - task: Kubernetes@1
