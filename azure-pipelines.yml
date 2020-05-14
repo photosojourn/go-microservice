@@ -25,3 +25,28 @@ stages:
           inputs:
             command: 'build'
             Dockerfile: '**/Dockerfile'
+
+  - stage: dev
+    displayName: 'Development'
+
+    jobs:
+
+      - deployment: deploy
+        displayName: 'Deploy Helm Chart'
+
+        environment: dev.default
+
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: HelmDeploy@0
+                  inputs:
+                    namespace: $(k8sNamespace)
+                    command: 'ls'
+
+
+
+
+
+
