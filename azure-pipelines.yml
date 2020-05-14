@@ -35,13 +35,11 @@ stages:
         displayName: "Helm Package"
         steps:
 
-          - task: HelmDeploy@0
-            displayName: Helm package
-            inputs:
-              command: package
-              chartPath: 'chart/'
-              destination: $(Build.ArtifactStagingDirectory)
-          
+        - task: HelmDeploy@0
+          inputs:
+            command: 'package'
+            chartPath: './chart'
+            destination: $(Build.ArtifactStagingDirectory)
 
       - deployment: deploy
         displayName: 'Deploy Helm Chart'
