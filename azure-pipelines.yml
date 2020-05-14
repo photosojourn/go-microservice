@@ -20,20 +20,27 @@ stages:
 
         - task: Docker@2
           inputs:
+            containerRegistry: 'gcrServiceConnection'
+            repository: 'go-microservice'
             command: 'buildAndPush'
             Dockerfile: '**/Dockerfile'
-            tags: $(Build.SourceVersion)
+            tags: '$(Build.SoruceVersion)'
 
   - stage: dev
     displayName: 'Development'
 
     jobs:
 
-      - job: pre
-        displayName: "Predeployment job"
+      - job: package
+        displayName: "Helm Package"
         steps:
-          
-          - script: ls
+
+          - task: HelmDeploy@0
+            displayName: Helm package
+            inputs:
+              command: package
+              chartPath: 'chart'
+              destination: $(Build.ArtifactStagingDirectory)
           
 
       - deployment: deploy
@@ -46,7 +53,7 @@ stages:
             deploy:
               steps:
 
-                - script: ls
+                - script: 'Deploy here...'
                 # - task: HelmDeploy@0
                 #   inputs:
                 #     connectionType: 'Kubernetes Service Connection'
