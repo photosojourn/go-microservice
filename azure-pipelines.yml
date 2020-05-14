@@ -63,7 +63,7 @@ stages:
                   inputs:
                     connectionType: 'Kubernetes Service Connection'
                     kubernetesServiceConnection: 'dev-default-1589456418781'
-                    namespace: $(k8sNamespace)
+                    namespace: default
                     command: 'install'
                     overrideValues: blue.image=$(img_url),green.image=$(img_url)
                     chartType: 'FilePath'
