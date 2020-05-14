@@ -44,6 +44,12 @@ stages:
                     namespace: 'default'
                     command: 'ls'
 
+                - task: Kubernetes@1
+                  inputs:
+                    namespace: $(k8sNamespace)
+                    command: 'get'
+                    arguments: 'namespaces'
+
 
 
 
