@@ -42,28 +42,30 @@ stages:
             destination: $(Build.ArtifactStagingDirectory)
             save: false
 
-        - publish: $(Build.ArtifactStagingDirectory)/go-microservice-0.1.0.tgz
-          artifact: go-microservice
+        - task: PublishBuildArtifacts@1
+          inputs:
+            pathToPublish: '$(Build.ArtifactStagingDirectory)/go-microservice-0.1.0.tgz'
+            artifactName: helm-package
 
-      # - deployment: deploy
-      #   dependsOn: package
-      #   displayName: 'Deploy Helm Chart'
-      #   environment: dev.default
-      #   variables:
-      #     img_url: 'gcr.io/gcp-cf-272812/go-microservice:$(Build.SourceVersion)'
+      - deployment: deploy
+        dependsOn: package
+        displayName: 'Deploy Helm Chart'
+        environment: dev.default
+        variables:
+          img_url: 'gcr.io/gcp-cf-272812/go-microservice:$(Build.SourceVersion)'
 
-      #   strategy:
-      #     runOnce:
-      #       deploy:
-      #         steps:
+        strategy:
+          runOnce:
+            deploy:
+              steps:
 
-      #           - task: HelmDeploy@0
-      #             inputs:
-      #               connectionType: 'Kubernetes Service Connection'
-      #               kubernetesServiceConnection: 'dev-default-1589456418781'
-      #               namespace: $(k8sNamespace)
-      #               command: 'install'
-      #               overrideValues: blue.image=$(img_url),green.image=$(img_url)
-      #               chartType: 'FilePath'
-      #               chartPath: $(Build.ArtifactStagingDirectory)/go-microservice-0.1.0.tgz
-      #               chartName: 'go-microservice'
+                - task: HelmDeploy@0
+                  inputs:
+                    connectionType: 'Kubernetes Service Connection'
+                    kubernetesServiceConnection: 'dev-default-1589456418781'
+                    namespace: $(k8sNamespace)
+                    command: 'install'
+                    overrideValues: blue.image=$(img_url),green.image=$(img_url)
+                    chartType: 'FilePath'
+                    chartPath: $(Agent.BuildDirectory)/go-microservice-0.1.0.tgz
+                    chartName: 'go-microservice'
