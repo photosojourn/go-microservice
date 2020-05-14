@@ -46,7 +46,7 @@ stages:
                     command: 'install'
                     overrideValues: blue.image=$(Build.SourceVersion),blue.pullPolicy=IfNotPresent,green.image=$(Build.SourceVersion),green.pullPolicy=IfNotPresent
                     chartType: 'FilePath'
-                    chartPath: './chart/'
+                    chartPath: '**/chart/'
                     chartName: 'go-microservice'
 
                 - task: Kubernetes@1
