@@ -21,7 +21,7 @@ stages:
         - task: Docker@2
           inputs:
             containerRegistry: 'gcrServiceConnection'
-            repository: 'gcp-cf/go-microservice'
+            repository: 'gcp-cf-272812/go-microservice'
             command: 'buildAndPush'
             Dockerfile: '**/Dockerfile'
             tags: '$(Build.SourceVersion)'
