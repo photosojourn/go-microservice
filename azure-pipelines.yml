@@ -39,13 +39,13 @@ stages:
           inputs:
             command: 'package'
             chartPath: './chart'
-            destination: $(Build.ArtifactStagingDirectory)
+            destination: '$(Build.ArtifactStagingDirectory)'
             save: false
 
         - task: PublishBuildArtifacts@1
           inputs:
-            pathToPublish: '$(Build.ArtifactStagingDirectory)/go-microservice-0.1.0.tgz'
-            artifactName: helm-package
+            pathToPublish: '$(Build.ArtifactStagingDirectory)'
+            artifactName: helm
 
       - deployment: deploy
         dependsOn: package
@@ -67,5 +67,5 @@ stages:
                     command: 'install'
                     overrideValues: blue.image=$(img_url),green.image=$(img_url)
                     chartType: 'FilePath'
-                    chartPath: $(Agent.BuildDirectory)/go-microservice-0.1.0.tgz
+                    chartPath: $(Agent.BuildDirectory)/helm/go-microservice-0.1.0.tgz
                     chartName: 'go-microservice'
