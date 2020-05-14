@@ -38,20 +38,22 @@ stages:
           runOnce:
             deploy:
               steps:
-                - task: HelmDeploy@0
-                  inputs:
-                    connectionType: 'Kubernetes Service Connection'
-                    kubernetesServiceConnection: 'dev-default-1589456418781'
-                    namespace: $(k8sNamespace)
-                    command: 'install'
-                    overrideValues: blue.image=$(Build.SourceVersion),blue.pullPolicy=IfNotPresent,green.image=$(Build.SourceVersion),green.pullPolicy=IfNotPresent
-                    chartType: 'FilePath'
-                    chartPath: 'chart/'
-                    chartName: 'go-microservice'
 
-                - task: Kubernetes@1
-                  inputs:
+                - script: ls
+                # - task: HelmDeploy@0
+                #   inputs:
+                #     connectionType: 'Kubernetes Service Connection'
+                #     kubernetesServiceConnection: 'dev-default-1589456418781'
+                #     namespace: $(k8sNamespace)
+                #     command: 'install'
+                #     overrideValues: blue.image=$(Build.SourceVersion),blue.pullPolicy=IfNotPresent,green.image=$(Build.SourceVersion),green.pullPolicy=IfNotPresent
+                #     chartType: 'FilePath'
+                #     chartPath: 'chart/'
+                #     chartName: 'go-microservice'
 
-                    namespace: $(k8sNamespace)
-                    command: 'get'
-                    arguments: 'namespaces'
+                # - task: Kubernetes@1
+                #   inputs:
+
+                #     namespace: $(k8sNamespace)
+                #     command: 'get'
+                #     arguments: 'namespaces'
