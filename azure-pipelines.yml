@@ -43,10 +43,9 @@ stages:
             save: false
 
       - deployment: deploy
+        dependsOn: package
         displayName: 'Deploy Helm Chart'
-
         environment: dev.default
-
         variables:
           img_url: 'gcr.io/gcp-cf-272812/go-microservice:$(Build.SourceVersion)'
 
@@ -54,7 +53,6 @@ stages:
           runOnce:
             deploy:
               steps:
-
 
                 - task: HelmDeploy@0
                   inputs:
@@ -66,10 +64,3 @@ stages:
                     chartType: 'FilePath'
                     chartPath: $(Build.ArtifactStagingDirectory)/go-microservice-0.1.0.tgz
                     chartName: 'go-microservice'
-
-                - task: Kubernetes@1
-                  inputs:
-
-                    namespace: $(k8sNamespace)
-                    command: 'get'
-                    arguments: 'namespaces'
