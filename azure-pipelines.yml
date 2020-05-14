@@ -42,25 +42,28 @@ stages:
             destination: $(Build.ArtifactStagingDirectory)
             save: false
 
-      - deployment: deploy
-        dependsOn: package
-        displayName: 'Deploy Helm Chart'
-        environment: dev.default
-        variables:
-          img_url: 'gcr.io/gcp-cf-272812/go-microservice:$(Build.SourceVersion)'
+        - publish: $(Build.ArtifactStagingDirectory)/go-microservice-0.1.0.tgz
+          artifact: go-microservice
 
-        strategy:
-          runOnce:
-            deploy:
-              steps:
+      # - deployment: deploy
+      #   dependsOn: package
+      #   displayName: 'Deploy Helm Chart'
+      #   environment: dev.default
+      #   variables:
+      #     img_url: 'gcr.io/gcp-cf-272812/go-microservice:$(Build.SourceVersion)'
 
-                - task: HelmDeploy@0
-                  inputs:
-                    connectionType: 'Kubernetes Service Connection'
-                    kubernetesServiceConnection: 'dev-default-1589456418781'
-                    namespace: $(k8sNamespace)
-                    command: 'install'
-                    overrideValues: blue.image=$(img_url),green.image=$(img_url)
-                    chartType: 'FilePath'
-                    chartPath: $(Build.ArtifactStagingDirectory)/go-microservice-0.1.0.tgz
-                    chartName: 'go-microservice'
+      #   strategy:
+      #     runOnce:
+      #       deploy:
+      #         steps:
+
+      #           - task: HelmDeploy@0
+      #             inputs:
+      #               connectionType: 'Kubernetes Service Connection'
+      #               kubernetesServiceConnection: 'dev-default-1589456418781'
+      #               namespace: $(k8sNamespace)
+      #               command: 'install'
+      #               overrideValues: blue.image=$(img_url),green.image=$(img_url)
+      #               chartType: 'FilePath'
+      #               chartPath: $(Build.ArtifactStagingDirectory)/go-microservice-0.1.0.tgz
+      #               chartName: 'go-microservice'
