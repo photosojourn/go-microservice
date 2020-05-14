@@ -31,6 +31,13 @@ stages:
 
     jobs:
 
+      - job: pre
+        displayName: "Predeployment job"
+        steps:
+          
+          - script: ls
+          
+
       - deployment: deploy
         displayName: 'Deploy Helm Chart'
 
