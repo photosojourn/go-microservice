@@ -39,7 +39,7 @@ stages:
             displayName: Helm package
             inputs:
               command: package
-              chartPath: 'chart'
+              chartPath: 'chart/'
               destination: $(Build.ArtifactStagingDirectory)
           
 
@@ -53,7 +53,7 @@ stages:
             deploy:
               steps:
 
-                - script: 'Deploy here...'
+                - script: echo 'Deploy here...'
                 # - task: HelmDeploy@0
                 #   inputs:
                 #     connectionType: 'Kubernetes Service Connection'
