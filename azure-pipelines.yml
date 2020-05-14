@@ -22,6 +22,7 @@ stages:
           inputs:
             command: 'build'
             Dockerfile: '**/Dockerfile'
+            tags: $(Build.SourceVersion)
 
   - stage: dev
     displayName: 'Development'
@@ -43,7 +44,7 @@ stages:
                     kubernetesServiceConnection: 'dev-default-1589456418781'
                     namespace: $(k8sNamespace)
                     command: 'install'
-                    overrideValues: blue.image=$(Build.Id), blue.pullPolicy=IfNotPresent, green.image=$(Build.BuildId), green.pullPolicy=IfNotPresent
+                    overrideValues: blue.image=$(Build.SourceVersion), blue.pullPolicy=IfNotPresent, green.image=$(Build.SourceVersion), green.pullPolicy=IfNotPresent
                     chartType: 'FilePath'
                     chartPath: './chart/'
                     chartName: 'go-microservice'
