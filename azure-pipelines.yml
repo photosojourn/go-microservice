@@ -18,13 +18,13 @@ stages:
         displayName: 'Build'
         steps:
 
-        - script: echo ls
+        - script: ls
 
-        - task: Docker@2
-          inputs:
-            command: 'build'
-            Dockerfile: '**/Dockerfile'
-            tags: $(Build.SourceVersion)
+        # - task: Docker@2
+        #   inputs:
+        #     command: 'build'
+        #     Dockerfile: '**/Dockerfile'
+        #     tags: $(Build.SourceVersion)
 
   - stage: dev
     displayName: 'Development'
