@@ -24,7 +24,7 @@ stages:
             repository: 'go-microservice'
             command: 'buildAndPush'
             Dockerfile: '**/Dockerfile'
-            tags: '$(Build.SoruceVersion)'
+            tags: '$(Build.SourceVersion)'
 
   - stage: dev
     displayName: 'Development'
