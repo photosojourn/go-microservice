@@ -18,6 +18,8 @@ stages:
         displayName: 'Build'
         steps:
 
+        - script: echo ls
+
         - task: Docker@2
           inputs:
             command: 'build'
