@@ -13,7 +13,7 @@ stages:
     jobs:
 
       - job: build
-        displayName: 'Build'
+        displayName: 'Build Application'
         steps:
 
         - task: Docker@2
@@ -23,11 +23,6 @@ stages:
             command: 'buildAndPush'
             Dockerfile: '**/Dockerfile'
             tags: '$(Build.SourceVersion)'
-
-  - stage: dev
-    displayName: 'Development'
-
-    jobs:
 
       - job: package
         displayName: "Helm Package"
@@ -42,9 +37,15 @@ stages:
             save: false
 
         - task: PublishBuildArtifacts@1
+          displayName: 'Publish chart locally'
           inputs:
             pathToPublish: '$(Build.ArtifactStagingDirectory)'
             artifactName: helm
+
+  - stage: dev
+    displayName: 'Development'
+
+    jobs:
 
       - deployment: deploy
         dependsOn: package
@@ -58,18 +59,11 @@ stages:
             deploy:
               steps:
 
-
                 - task: ExtractFiles@1
                   inputs:
                     archiveFilePatterns: $(Agent.BuildDirectory)/helm/go-microservice-0.1.0.tgz
                     cleanDestinationFolder: true
                     destinationFolder: '$(Agent.BuildDirectory)/helm/go-microservice-0.1.0'
-              
-                - task: Bash@3
-                  inputs:
-                    targetType: 'inline'
-                    script: 'ls'
-                    workingDirectory: '$(Agent.BuildDirectory)/helm/go-microservice-0.1.0'
 
                 - task: HelmDeploy@0
                   inputs:
