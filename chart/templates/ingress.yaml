@@ -9,4 +9,4 @@ spec:
       - path: /go
         backend:
           serviceName: go-microservice
-          servicePort: 8080
+          servicePort: http-go-microservice
