@@ -55,8 +55,9 @@ stages:
 
         strategy:
           runOnce:
-            preDeploy:
-             steps:
+            deploy:
+              steps:
+
                 - task: ExtractFiles@1
                   displayName: 'Fetch Environment values'
                   inputs:
@@ -64,8 +65,6 @@ stages:
                     cleanDestinationFolder: true
                     destinationFolder: '$(Agent.BuildDirectory)/helm/go-microservice-0.1.0'
 
-            deploy:
-              steps:
                 - task: HelmDeploy@0
                   inputs:
                     connectionType: 'Kubernetes Service Connection'
@@ -91,8 +90,9 @@ stages:
 
         strategy:
           runOnce:
-            preDeploy:
-             steps:
+            deploy:
+              steps:
+
                 - task: ExtractFiles@1
                   displayName: 'Fetch Environment values'
                   inputs:
@@ -100,8 +100,6 @@ stages:
                     cleanDestinationFolder: true
                     destinationFolder: '$(Agent.BuildDirectory)/helm/go-microservice-0.1.0'
 
-            deploy:
-              steps:
                 - task: HelmDeploy@0
                   inputs:
                     connectionType: 'Kubernetes Service Connection'
