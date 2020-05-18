@@ -62,7 +62,7 @@ stages:
                     connectionType: 'Kubernetes Service Connection'
                     kubernetesServiceConnection: 'dev-default-1589456418781'
                     namespace: default
-                    command: 'install'
+                    command: 'upgrade'
                     overrideValues: blue.image=$(img_url),green.image=$(img_url)
                     chartType: 'FilePath'
                     chartPath: $(Agent.BuildDirectory)/helm/go-microservice-0.1.0.tgz
