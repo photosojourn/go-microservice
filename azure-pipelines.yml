@@ -34,6 +34,7 @@ stages:
         steps:
 
         - task: HelmDeploy@0
+          displayName: 'Package helm chart'
           inputs:
             command: 'package'
             chartPath: './chart'
