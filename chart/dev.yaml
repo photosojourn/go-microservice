@@ -6,11 +6,11 @@ productionSlot: green
 
 blue:
   replicaCount: 1
-  image: photosojourn/go-microservice:latest
+  image: gcr.io/gcp-cf-272812/go-microservice:latest
   pullPolicy: Always
 green:
   replicaCount: 1
-  image: photosojourn/go-microservice:latest
+  image: gcr.io/gcp-cf-272812/go-microservice:latest
   pullPolicy: Always
 
 
