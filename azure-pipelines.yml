@@ -48,7 +48,6 @@ stages:
     jobs:
 
       - deployment: deploy
-        dependsOn: package
         displayName: 'Deploy Helm Chart'
         environment: dev.default
         variables:
