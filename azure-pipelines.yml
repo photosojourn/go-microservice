@@ -71,13 +71,14 @@ stages:
                     script: 'ls'
                     workingDirectory: '$(Agent.BuildDirectory)/helm/go-microservice-0.1.0'
 
-                # - task: HelmDeploy@0
-                #   inputs:
-                #     connectionType: 'Kubernetes Service Connection'
-                #     kubernetesServiceConnection: 'dev-default-1589456418781'
-                #     namespace: default
-                #     command: 'upgrade'
-                #     overrideValues: blue.image=$(img_url),green.image=$(img_url)
-                #     chartType: 'FilePath'
-                #     chartPath: $(Agent.BuildDirectory)/helm/go-microservice-0.1.0.tgz
-                #     releaseName: 'go-microservice'
+                - task: HelmDeploy@0
+                  inputs:
+                    connectionType: 'Kubernetes Service Connection'
+                    kubernetesServiceConnection: 'dev-default-1589456418781'
+                    namespace: default
+                    command: 'upgrade'
+                    valueFile: '$(Agent.BuildDirectory)/helm/go-microservice-0.1.0/chart/$(Environment.Name).yaml'
+                    overrideValues: blue.image=$(img_url),green.image=$(img_url)
+                    chartType: 'FilePath'
+                    chartPath: $(Agent.BuildDirectory)/helm/go-microservice-0.1.0.tgz
+                    releaseName: 'go-microservice'
