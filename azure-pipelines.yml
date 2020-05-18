@@ -66,4 +66,4 @@ stages:
                     overrideValues: blue.image=$(img_url),green.image=$(img_url)
                     chartType: 'FilePath'
                     chartPath: $(Agent.BuildDirectory)/helm/go-microservice-0.1.0.tgz
-                    chartName: 'go-microservice'
+                    releaseName: 'go-microservice'
