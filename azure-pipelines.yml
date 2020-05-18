@@ -63,7 +63,7 @@ stages:
                   inputs:
                     archiveFilePatterns: $(Agent.BuildDirectory)/helm/go-microservice-0.1.0.tgz
                     cleanDestinationFolder: true
-                    destinationFolder: 
+                    destinationFolder: '$(Agent.BuildDirectory)/helm/go-microservice-0.1.0'
               
                 - task: Bash@3
                   inputs:
