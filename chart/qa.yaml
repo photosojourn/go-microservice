@@ -1,0 +1,19 @@
+# Default values for go-microservice.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+productionSlot: green
+
+blue:
+  replicaCount: 1
+  image: gcr.io/gcp-cf-272812/go-microservice:latest
+  pullPolicy: Always
+green:
+  replicaCount: 1
+  image: gcr.io/gcp-cf-272812/go-microservice:latest
+  pullPolicy: Always
+
+
+service:
+  type: NodePort
+  port: 8080
