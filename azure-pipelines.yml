@@ -55,15 +55,17 @@ stages:
 
         strategy:
           runOnce:
-            deploy:
-              steps:
-
+            preDeploy:
+             steps:
                 - task: ExtractFiles@1
+                  displayName: 'Fetch Environment values'
                   inputs:
                     archiveFilePatterns: $(Agent.BuildDirectory)/helm/go-microservice-0.1.0.tgz
                     cleanDestinationFolder: true
                     destinationFolder: '$(Agent.BuildDirectory)/helm/go-microservice-0.1.0'
 
+            deploy:
+              steps:
                 - task: HelmDeploy@0
                   inputs:
                     connectionType: 'Kubernetes Service Connection'
@@ -75,7 +77,7 @@ stages:
                     chartType: 'FilePath'
                     chartPath: $(Agent.BuildDirectory)/helm/go-microservice-0.1.0.tgz
                     releaseName: 'go-microservice'
-
+          
   - stage: qa
     displayName: 'QA'
 
@@ -89,15 +91,17 @@ stages:
 
         strategy:
           runOnce:
-            deploy:
-              steps:
-
+            preDeploy:
+             steps:
                 - task: ExtractFiles@1
+                  displayName: 'Fetch Environment values'
                   inputs:
                     archiveFilePatterns: $(Agent.BuildDirectory)/helm/go-microservice-0.1.0.tgz
                     cleanDestinationFolder: true
                     destinationFolder: '$(Agent.BuildDirectory)/helm/go-microservice-0.1.0'
 
+            deploy:
+              steps:
                 - task: HelmDeploy@0
                   inputs:
                     connectionType: 'Kubernetes Service Connection'
