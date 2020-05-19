@@ -1,4 +1,5 @@
 trigger:
+
   branches:
     include:
     - '*'
@@ -99,6 +100,14 @@ stages:
                     archiveFilePatterns: $(Agent.BuildDirectory)/helm/go-microservice-0.1.0.tgz
                     cleanDestinationFolder: true
                     destinationFolder: '$(Agent.BuildDirectory)/helm/go-microservice-0.1.0'
+
+                - task: DownloadSecureFile@1
+                  name: env_values 
+                  inputs:
+                    secureFile: 'values.yaml'
+
+                - script: |
+                    ls $(env_values.secureFilePath)
 
                 - task: HelmDeploy@0
                   inputs:
