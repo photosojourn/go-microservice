@@ -1,0 +1,52 @@
+parameters:
+  - name: environment
+    default: ''
+
+  - name: helm_chart_archive_path
+    default: ''
+
+  - name: helm_values_file_path
+    default: ''
+
+  - name: kube_connection_type
+    default: ''
+
+  - name: kube_service_connection
+    default: ''
+
+  - name: helm_override_values
+    default: ''
+
+  - name: helm_release_name
+    default: ''
+
+jobs:
+
+  - deployment: deploy
+    displayName: 'Deploy Helm Chart'
+    environment: ${{ parameters.environment }}
+
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+
+          - task: ExtractFiles@1
+            displayName: 'Get Environment values'
+            inputs:
+              archiveFilePatterns: ${{ parameters.helm_chart_archive_path }}
+              destinationFolder: ${{ parameters.helm_values_file_path }}
+              cleanDestinationFolder: true
+
+          - task: HelmDeploy@0
+            displayName: 'Deploy Helm chart to environment'
+            inputs:
+              connectionType: ${{ parameters.kube_connection_type }}
+              kubernetesServiceConnection: ${{ parameters.kube_service_connection }}
+              namespace: $(Environment.ResourceName)
+              command: 'upgrade'
+              valueFile: ${{ parameters.helm_values_file_path }}/go-microservice/$(Environment.Name).yaml
+              overrideValues: ${{ parameters.helm_override_values }}
+              chartType: 'FilePath'
+              chartPath: ${{ parameters.helm_chart_archive_path }}
+              releaseName: ${{ parameters.helm_release_name }}

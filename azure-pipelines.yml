@@ -45,39 +45,20 @@ stages:
 
   - stage: dev
     displayName: 'Development'
+    variables:
+      img_url: 'gcr.io/gcp-cf-272812/go-microservice:$(Build.SourceVersion)'
 
     jobs:
-
-      - deployment: deploy
-        displayName: 'Deploy Helm Chart'
-        environment: dev.default
-        variables:
-          img_url: 'gcr.io/gcp-cf-272812/go-microservice:$(Build.SourceVersion)'
-
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-
-                - task: ExtractFiles@1
-                  displayName: 'Fetch Environment values'
-                  inputs:
-                    archiveFilePatterns: $(Agent.BuildDirectory)/helm/go-microservice-0.1.0.tgz
-                    cleanDestinationFolder: true
-                    destinationFolder: '$(Agent.BuildDirectory)/helm/go-microservice-0.1.0'
-
-                - task: HelmDeploy@0
-                  inputs:
-                    connectionType: 'Kubernetes Service Connection'
-                    kubernetesServiceConnection: 'dev-default-1589456418781'
-                    namespace: $(Environment.ResourceName)
-                    command: 'upgrade'
-                    valueFile: '$(Agent.BuildDirectory)/helm/go-microservice-0.1.0/go-microservice/$(Environment.Name).yaml'
-                    overrideValues: blue.image=$(img_url),green.image=$(img_url)
-                    chartType: 'FilePath'
-                    chartPath: $(Agent.BuildDirectory)/helm/go-microservice-0.1.0.tgz
-                    releaseName: 'go-microservice'
-          
+      - template: 'templates/helm-deployment.yml'
+        parameters:
+          environment: 'dev.default'
+          kube_connection_type: 'Kubernetes Service Connection'
+          kube_service_connection: 'dev-default-1589456418781'
+          helm_chart_archive_path: '$(Agent.BuildDirectory)/helm/go-microservice-0.1.0.tgz'
+          helm_values_file_path: '$(Agent.BuildDirectory)/helm/go-microservice-0.1.0'
+          helm_override_values: 'blue.image=$(img_url),green.image=$(img_url)'
+          helm_release_name: 'go-microservice'
+         
   - stage: qa
     displayName: 'QA'
 
