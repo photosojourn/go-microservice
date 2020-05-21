@@ -39,7 +39,7 @@ jobs:
           steps:
 
           - task: ExtractFiles@1
-            displayName: 'Get Environment values'
+            displayName: 'Get Environment overrides'
             inputs:
               archiveFilePatterns: ${{ parameters.helm_chart_archive_path }}
               destinationFolder: ${{ parameters.helm_values_file_path }}
