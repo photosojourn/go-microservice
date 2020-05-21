@@ -53,7 +53,9 @@ jobs:
               namespace: $(Environment.ResourceName)
               command: 'upgrade'
               valueFile: ${{ parameters.helm_values_file_path }}/go-microservice/$(Environment.Name).yaml
-              overrideValues: ${{ parameters.helm_override_values }}
+              overrideValues:
+                - 'blue.image=$(img_url)'
+                - 'green.image=$(img_url)'
               chartType: 'FilePath'
               chartPath: ${{ parameters.helm_chart_archive_path }}
               releaseName: ${{ parameters.helm_release_name }}

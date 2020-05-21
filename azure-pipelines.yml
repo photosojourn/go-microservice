@@ -57,9 +57,6 @@ stages:
           helm_release_name: 'go-microservice-dev'
           helm_chart_archive_path: '$(Agent.BuildDirectory)/helm/go-microservice-0.1.0.tgz'
           helm_values_file_path: '$(Agent.BuildDirectory)/helm/go-microservice-0.1.0'
-          helm_override_values:
-            - 'blue.image=$(img_url)'
-            - 'green.image=$(img_url)'
          
   - stage: qa
     displayName: 'QA'
