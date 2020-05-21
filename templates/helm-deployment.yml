@@ -1,23 +1,30 @@
 parameters:
   - name: environment
+    type: string
     default: ''
 
   - name: helm_chart_archive_path
+    type: string
     default: ''
 
   - name: helm_values_file_path
+    type: string
     default: ''
 
   - name: kube_connection_type
+    type: string
     default: ''
 
   - name: kube_service_connection
+    type: string
     default: ''
 
   - name: helm_override_values
+    type: object
     default: ''
 
   - name: helm_release_name
+    type: string
     default: ''
 
 jobs:
