@@ -21,7 +21,9 @@ parameters:
 
   - name: helm_override_values
     type: object
-    default: ''
+    default:
+     - 'blue.image': $(img_url)
+     - 'green.image': $(img_url)
 
   - name: helm_release_name
     type: string
@@ -53,9 +55,7 @@ jobs:
               namespace: $(Environment.ResourceName)
               command: 'upgrade'
               valueFile: ${{ parameters.helm_values_file_path }}/go-microservice/$(Environment.Name).yaml
-              overrideValues:
-                - 'blue.image=$(img_url)'
-                - 'green.image=$(img_url)'
+              overrideValues: ${{ each param in parameters.helm_override_values }}: ${{ param.Key }}=${{ param.Value }},
               chartType: 'FilePath'
               chartPath: ${{ parameters.helm_chart_archive_path }}
               releaseName: ${{ parameters.helm_release_name }}
