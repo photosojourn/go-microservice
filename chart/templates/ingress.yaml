@@ -6,7 +6,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /go
+      - path: {{ .Values.ingress.path }}
         backend:
           serviceName: go-microservice
           servicePort: 8080

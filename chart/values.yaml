@@ -17,3 +17,6 @@ green:
 service:
   type: ClusterIP
   port: 8080
+
+ingress:
+  path: /
